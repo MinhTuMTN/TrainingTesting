@@ -67,6 +67,8 @@ function RegisterPage() {
         }
       })
       .catch((error) => {
+        console.log(error);
+
         alert("An error occurred. Please try again later.");
       });
   };

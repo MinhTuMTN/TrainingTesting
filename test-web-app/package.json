@@ -1,16 +1,20 @@
 {
   "name": "test-web-app",
   "private": true,
+  "homepage": "https://minhtumtn.github.io/TrainingTesting/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "lint": "eslint ."
   },
   "dependencies": {
     "antd": "^5.21.2",
+    "gh-pages": "^6.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
