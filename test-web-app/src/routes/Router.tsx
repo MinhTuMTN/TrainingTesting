@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "/register-success",
+        path: "/success",
         element: <SuccessPage />,
       },
     ],

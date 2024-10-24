@@ -45,7 +45,7 @@ function RegisterPage() {
       return;
     }
 
-    fetch("http://tuyetvi-testing.ddns.net:9090/api/auth/register", {
+    fetch("http://tuyetvi-testing.ddns.net:8080/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
