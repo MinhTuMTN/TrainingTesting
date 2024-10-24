@@ -21,6 +21,8 @@ jobs:
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
+        with:
+          install-command: "npm ci"
 
       - name: Build project
         run: cd test-web-app && npm ci && npm run build
