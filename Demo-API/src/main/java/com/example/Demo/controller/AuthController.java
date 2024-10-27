@@ -5,6 +5,7 @@ import com.example.Demo.dto.request.LoginRequest;
 import com.example.Demo.dto.response.DemoResponse;
 import com.example.Demo.service.AccountService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,13 +18,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<?> registerAccount(
             @RequestBody AccountRegister request
     ) {
         return ResponseEntity.ok(DemoResponse.builder()
                 .success(true)
                 .message("Account registered successfully")
-                .data(accountService.registerAccount(request))
+                .body(accountService.registerAccount(request))
                 .build()
         );
     }
@@ -35,7 +37,7 @@ public class AuthController {
         return ResponseEntity.ok(DemoResponse.builder()
                 .success(true)
                 .message("Account logged in successfully")
-                .data(accountService.loginAccount(request))
+                .body(accountService.loginAccount(request))
                 .build()
         );
     }

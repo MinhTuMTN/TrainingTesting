@@ -2,9 +2,10 @@ import { Button, Flex, Input, Typography } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AccountServices from "../../services/AccountServices";
+import useAuth from "../../hooks/useAuth";
 
 const StyledContainer = styled(Flex)`
-  height: 100vh;
   justify-content: center;
 `;
 const StyledForm = styled(Flex)`
@@ -33,44 +34,34 @@ function RegisterPage() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigation = useNavigate();
+  const auth = useAuth();
 
   const handleNavigateSuccessPage = () => {
     navigation("/success");
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const errorMessage = validateForm();
     if (errorMessage) {
       setErrorMessage(errorMessage);
       return;
     }
 
-    fetch("http://tuyetvi-testing.ddns.net:8080/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fullName: info.fullName,
-        email: info.email,
-        password: info.password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+    try {
+      const response = await AccountServices.register(
+        info.fullName,
+        info.email,
+        info.password
+      );
 
-        if (data.success === false) {
-          setErrorMessage(data.message);
-        } else {
-          handleNavigateSuccessPage();
-        }
-      })
-      .catch((error) => {
-        console.log(error);
+      const body = response.data.body;
+      console.log(body);
 
-        alert("An error occurred. Please try again later.");
-      });
+      auth.login(body.token, body.fullName, body.email);
+      handleNavigateSuccessPage();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const validateForm = () => {

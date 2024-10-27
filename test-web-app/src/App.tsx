@@ -1,8 +1,13 @@
 import Router from "./routes/Router";
-import RegisterPage from "./screens/auth/RegisterPage";
+import "./App.css";
+import AuthProvider from "./hooks/AuthProvider";
 
 function App() {
-  return <Router />;
+  return (
+    <AuthProvider>
+      <Router />
+    </AuthProvider>
+  );
 }
 
 export default App;

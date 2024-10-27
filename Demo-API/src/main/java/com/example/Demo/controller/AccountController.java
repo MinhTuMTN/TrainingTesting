@@ -25,4 +25,11 @@ public class AccountController {
         ) {
         return ResponseEntity.ok(accountService.updateAccount(authorization, request));
     }
+
+    @GetMapping
+    public ResponseEntity<?> getAccount(
+            @RequestHeader("Authorization") String authorization
+    ) {
+        return ResponseEntity.ok(accountService.getAccount(authorization));
+    }
 }

@@ -19,7 +19,7 @@ public class APIExceptionHandler {
                 DemoResponse.builder()
                         .success(false)
                         .message(e.getMessage())
-                        .data(null)
+                        .body(null)
                         .build()
         );
     }
@@ -36,7 +36,7 @@ public class APIExceptionHandler {
                 DemoResponse.builder()
                         .success(false)
                         .message("Internal server error")
-                        .data(null)
+                        .body(null)
                         .build()
         );
     }
